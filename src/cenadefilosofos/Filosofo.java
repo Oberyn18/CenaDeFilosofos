@@ -71,4 +71,18 @@ public class Filosofo implements Runnable{
     public String toString() {
       return "Filosofo-" + id;
     }
+
+    public Palillo getPalilloIzquierdo() {
+        return palilloIzquierdo;
+    }
+
+    public Palillo getPalilloDerecho() {
+        return palilloDerecho;
+    }
+
+    public int getId() {
+        return id;
+    }
+    
+    
 }

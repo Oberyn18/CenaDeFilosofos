@@ -38,4 +38,10 @@ public class Palillo {
     public String toString() {
       return "Palillo-" + id;
     }
+
+    public int getId() {
+        return id;
+    }
+    
+    
 }

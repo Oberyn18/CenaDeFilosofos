@@ -30,11 +30,19 @@ public class CenaDeFilosofos {
       // Crea un conjunto de hilos, un hilo por filósofo.
       executorService = Executors.newFixedThreadPool(NUM_FILOSOFOS);
 
-      // Crea cada filósofo con los palillos de sus costados correspondientes.s
+      // Crea cada filósofo con los palillos de sus costados correspondientes.
       for (int i = 0; i < NUM_FILOSOFOS; i++) {
         filosofos[i] = new Filosofo(i, palillos[i], palillos[(i + 1) % NUM_FILOSOFOS]);
+          System.out.println("El filosofo " + filosofos[i].getId() + " tiene como palillos: ");
+          System.out.println("   Palillo-" + filosofos[i].getPalilloDerecho().getId() + " <-- derecho");
+          System.out.println("   Palillo-" + filosofos[i].getPalilloIzquierdo().getId() + " <-- izquierdo");
+      }
+      
+      // Además, asigna el filosofo a su hilo correspondiente y lo pone a ejecutar.
+      for (int i = 0; i < NUM_FILOSOFOS; i++) {
         executorService.execute(filosofos[i]);
       }
+      
       // El hilo principal duerme luego de la simulación
       Thread.sleep(MILISEGUNDOS);
       // Detenemos a todos los filósofos que se van ejecutando haciendo que estén lleno.
@@ -53,8 +61,8 @@ public class CenaDeFilosofos {
 
       // Muestra cuanto se alimentó cada filósofo finalmente
       for (Filosofo filosofo : filosofos) {
-        System.out.println(filosofo + " => No of Turns to Eat ="
-                + filosofo.getNumTurnosDeComida());
+        System.out.println("El " + filosofo + "  tuvo " 
+                + filosofo.getNumTurnosDeComida() + " turnos para comer.");
       }
     }
   }
