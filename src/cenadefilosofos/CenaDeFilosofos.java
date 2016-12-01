@@ -7,7 +7,7 @@ public class CenaDeFilosofos {
 
     // Número de filósofos en la mesa
     private static final int NUM_FILOSOFOS = 10;
-    private static final int SIMULATION_MILLIS = 1000 * 10;
+    private static final int MILISEGUNDOS = 1000 * 10;
     
     
     public static void main(String[] args) throws InterruptedException {
@@ -22,33 +22,36 @@ public class CenaDeFilosofos {
       // Tantos palillos como filósofos
       Palillo[] palillos = new Palillo[NUM_FILOSOFOS];
       
+      // Creamos los distintos objetos palillos
       for (int i = 0; i < NUM_FILOSOFOS; i++) {
         palillos[i] = new Palillo(i);
       }
 
+      // Crea un conjunto de hilos, un hilo por filósofo.
       executorService = Executors.newFixedThreadPool(NUM_FILOSOFOS);
 
+      // Crea cada filósofo con los palillos de sus costados correspondientes.s
       for (int i = 0; i < NUM_FILOSOFOS; i++) {
         filosofos[i] = new Filosofo(i, palillos[i], palillos[(i + 1) % NUM_FILOSOFOS]);
         executorService.execute(filosofos[i]);
       }
-      // Main thread sleeps till time of simulation
-      Thread.sleep(SIMULATION_MILLIS);
-      // Stop all philosophers.
+      // El hilo principal duerme luego de la simulación
+      Thread.sleep(MILISEGUNDOS);
+      // Detenemos a todos los filósofos que se van ejecutando haciendo que estén lleno.
       for (Filosofo philosopher : filosofos) {
         philosopher.estaLleno = true;
       }
 
     } finally {
-      // Close everything down.
+      // Acabamos todos los hilos.
       executorService.shutdown();
 
-      // Wait for all thread to finish
+      // Esperamos a que todos los hilos hayan acabado
       while (!executorService.isTerminated()) {
         Thread.sleep(1000);
       }
 
-      // Time for check
+      // Muestra cuanto se alimentó cada filósofo finalmente
       for (Filosofo filosofo : filosofos) {
         System.out.println(filosofo + " => No of Turns to Eat ="
                 + filosofo.getNumTurnosDeComida());
