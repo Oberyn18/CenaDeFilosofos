@@ -21,9 +21,9 @@ public class Palillo {
     }
 
     public boolean recogerPalillo(Filosofo filo, String lado) throws InterruptedException {
-      // EL aplillo es bloqueado si en los ultimos 10 ms éste no ha sido tomado por nadie.
+      // EL palillo puede ser tomado solo sí en los ultimos 10 ms éste no ha sido tomado por nadie.
       if (up.tryLock(10, TimeUnit.MILLISECONDS)) {
-        System.out.println(filo + " recogió el " + this + " " + lado);
+        System.out.println(filo + " recogió el " + this + " que se encuentra a su lado" + lado);
         return true;
       }
       return false;

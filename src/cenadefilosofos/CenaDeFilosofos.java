@@ -38,6 +38,9 @@ public class CenaDeFilosofos {
           System.out.println("   Palillo-" + filosofos[i].getPalilloIzquierdo().getId() + " <-- izquierdo");
       }
       
+        System.out.println("");
+        System.out.println("");
+      
       // Además, asigna el filosofo a su hilo correspondiente y lo pone a ejecutar.
       for (int i = 0; i < NUM_FILOSOFOS; i++) {
         executorService.execute(filosofos[i]);
@@ -58,7 +61,10 @@ public class CenaDeFilosofos {
       while (!executorService.isTerminated()) {
         Thread.sleep(1000);
       }
-
+      
+        System.out.println("");
+        System.out.println("");
+      
       // Muestra cuanto se alimentó cada filósofo finalmente
       for (Filosofo filosofo : filosofos) {
         System.out.println("El " + filosofo + "  tuvo " 
@@ -67,4 +73,3 @@ public class CenaDeFilosofos {
     }
   }
 }
-
